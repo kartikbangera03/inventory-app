@@ -1,0 +1,12 @@
+extends layout 
+
+block content 
+    h1=title 
+    if productinstance_list.length 
+        ul 
+            each productinstance in productinstance_list 
+                li 
+                    a(href=productinstance.url) #{productinstance.product.name} 
+                    | : #{productinstance.status} 
+    else 
+        p There are no product instances 

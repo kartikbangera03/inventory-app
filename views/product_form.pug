@@ -1,0 +1,42 @@
+extends layout 
+
+block content 
+    h1=title
+
+    form(method='POST')
+        .form-group     
+            label(for='productName') Product Name :
+            input#productName.form-control( name="productName" type='text' required value=(undefined===savedUserInput ? '': savedUserInput.name))
+            <br />
+            label(for='companyName') Manufacturer Name :
+            input#companyName.form-control( name="companyName" type='text' required value=(undefined===savedUserInput ? '': savedUserInput.companyName))
+            <br />
+            label(for='productDescription') Decsription :
+            input#productDescription.form-control( name="productDescription" type='text' required value=(undefined===savedUserInput ? '': savedUserInput.description))
+            <br />
+            label(for='productCategory') Category :
+            select#productCategory.form-control( name="productCategory"  required)
+                option(value='') --Please Select a Category--
+                for categoryVal in categoryList 
+                    if savedUserInput   
+                        if categoryVal._id.toString()===savedUserInput.category.toString()
+                            option(value=categoryVal._id selected) #{categoryVal.name}
+                        else
+                            option(value=categoryVal._id) #{categoryVal.name}
+                    else 
+                        option(value=categoryVal._id) #{categoryVal.name}
+
+            <br />
+            label(for='productQuantity') Quantity :
+            input#productQuantity.form-control( name="productQuantity" type='text' required value=(undefined===savedUserInput ? '': savedUserInput.quantity))
+            <br />
+            label(for='productPrice') Price :
+            input#productPrice.form-control( name="productPrice" type='number' required value=(undefined===savedUserInput ? '': savedUserInput.price))
+            <br />
+           
+            button.btn.btn-primary(type='submit') Submit
+            
+    if errors 
+        ul 
+            for error in errors 
+                li!=error.msg

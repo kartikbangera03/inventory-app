@@ -1,0 +1,48 @@
+extends layout 
+
+block content 
+    h1=title
+
+    form(method='POST')
+        .form-group     
+            if editMode 
+                <br />
+                h4  Product :  #{savedUserInput.product.name}
+            else
+                label(for='productInstanceProduct') Product :
+                select#productInstanceProduct.form-control( name="productInstanceProduct"  required)
+                    option(value='') --Please Select a Product--
+                    
+                    for product in productList 
+                        if savedUserInput   
+                            if product._id.toString()===savedUserInput.product.toString()
+                                option(value=product._id selected) #{product.name}
+                            else
+                                option(value=product._id) #{product.name}
+                        else 
+                            option(value=product._id) #{product.name}
+            
+            <br />
+
+            label(for='productInstanceInStockNumber') InStock(number) :
+            input#productInstanceInStockNumber.form-control( 
+                name="productInstanceInStockNumber" 
+                type='number' 
+                required 
+                value=(undefined===savedUserInput ? '': savedUserInput.number_in_stock))
+            <br />
+
+            label(for='productInstanceStatus') Availability Status :
+            select#productInstanceStatus.form-control( name="productInstanceStatus"  required)
+                option(value='') --Please Select a Status--
+                option(value="UnAvailable") Unavailable    
+                option(value="Available") Available
+
+            <br />
+           
+            button.btn.btn-primary(type='submit') Submit
+            
+    if errors 
+        ul 
+            for error in errors 
+                li!=error.msg

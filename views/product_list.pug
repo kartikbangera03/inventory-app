@@ -1,0 +1,12 @@
+extends layout 
+
+block content
+    h1=title 
+    if productList.length 
+        ul  
+            each product in productList
+                li 
+                    a(href=product.url) #{product.name} 
+                    | ( #{product.category.name} )
+    else 
+        p There are no products

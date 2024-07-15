@@ -1,0 +1,16 @@
+extends layout 
+
+block content 
+    h1=title 
+    <br />
+    p #[strong Product : ] #{productinstance.product.name}
+    p #[strong Manufacturer : ] #{productinstance.product.companyName}
+    p #[strong Description : ] #{productinstance.product.description}
+    p #[strong Quantity : ] #{productinstance.product.quantity}
+    p #[strong Price : ] $ #{productinstance.product.price}
+    p #[strong Number in stock : ]  #{productinstance.number_in_stock}
+    p #[strong Status : ]  #{productinstance.status}
+
+
+    p  
+      a(href=productinstance.url+'/update') Update  

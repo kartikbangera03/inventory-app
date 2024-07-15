@@ -1,0 +1,23 @@
+extends layout
+
+block content
+    h1=title 
+    <br />
+    p #[strong Category : ] #{categoryDetails.name}
+    if categoryDetails.description 
+        p #[strong Description : ] #{categoryDetails.description}
+
+    if categoryProducts.length
+        ul 
+            each product in categoryProducts 
+                li 
+                    a(href=product.url) #{product.name}
+                    |  (#{product.companyName})
+    else 
+        p There are no Products under this category
+
+    hr 
+    p  
+      a(href=categoryDetails.url+'/delete') Delete
+    p  
+      a(href=categoryDetails.url+'/update') Update  

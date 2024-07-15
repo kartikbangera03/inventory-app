@@ -1,0 +1,19 @@
+extends layout 
+
+block content 
+    h1=title
+
+    form(method='POST')
+        .form-group     
+            label(for='categoryName') Category Name :
+            input#categoryName.form-control( name="categoryName" type='text' required value=(undefined===savedUserInput ? '': savedUserInput.name))
+            <br />
+            label(for='categoryDescription') Description :
+            input#categoryDescription.form-control( name="categoryDescription" type='text' value=(undefined===savedUserInput ? '': savedUserInput.description))
+            <br />
+            button.btn.btn-primary(type='submit') Submit
+            
+    if errors 
+        ul 
+            for error in errors 
+                li!=error.msg

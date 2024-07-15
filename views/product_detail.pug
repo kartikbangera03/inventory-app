@@ -1,0 +1,19 @@
+extends layout 
+
+block content 
+    h1=title 
+    <br />
+    p #[strong Manufacturer : ] #{product.companyName}
+    p #[strong Description : ] #{product.description}
+    p #[strong Category : ] #{product.category.name}
+    p #[strong Quantity : ] #{product.quantity}
+    p #[strong Price : ] $ #{product.price}
+
+    each val in productinstance 
+        p #[strong Status : ] #{val.status}
+
+    hr 
+    p  
+      a(href=product.url+'/delete') Delete
+    p  
+      a(href=product.url+'/update') Update      
